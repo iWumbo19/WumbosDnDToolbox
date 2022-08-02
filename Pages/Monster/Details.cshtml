@@ -1,0 +1,175 @@
+﻿@page
+@model WumbosDnDToolbox.Pages.Monster.DetailsModel
+@section Styles{
+	<link rel="stylesheet" href="~/css/details.css" />
+}
+@{
+}
+
+<p>
+    <a href="Index">Back to Database</a>
+</p>
+<div class="stat-block wide">
+	<hr class="orange-border" />
+	<div class="section-left">
+		<div class="creature-heading">
+			<h1>@Model._monster.name</h1>
+			<h2>@Model._monster.size @Model._monster.type, @Model._monster.alignment</h2>
+		</div> <!-- creature heading -->
+		<svg height="5" width="100%" class="tapered-rule">
+	    <polyline points="0,0 400,2.5 0,5"></polyline>
+	  </svg>
+		<div class="top-stats">
+			<div class="property-line first">
+				<h4>Armor Class</h4>
+				<p>@Model._monster.armor_class</p>
+			</div> <!-- property line -->
+			<div class="property-line">
+				<h4>Hit Points</h4>
+				<p>@Model._monster.hit_points</p>
+			</div> <!-- property line -->
+			<div class="property-line last">
+				<h4>Speed</h4>
+				<p> @if (Model._monster.speed.walk != null)
+                    {
+                        <p>Walk: @Model._monster.speed.walk</p>
+                    }
+					@if (Model._monster.speed.burrow != null)
+                    {
+                        <p>Walk: @Model._monster.speed.burrow</p>
+                    }
+					@if (Model._monster.speed.climb != null)
+                    {
+                        <p>Walk: @Model._monster.speed.climb</p>
+                    }
+                    @if (Model._monster.speed.fly != null)
+                    {
+                        <p>Fly: @Model._monster.speed.fly</p>
+                    }
+                    @if (Model._monster.speed.swim != null)
+                    {
+                        <p>Swim: @Model._monster.speed.swim</p>
+                    }
+				</p>
+			</div> <!-- property line -->
+			<svg height="5" width="100%" class="tapered-rule">
+	    <polyline points="0,0 400,2.5 0,5"></polyline>
+	  </svg>
+			<div class="abilities">
+				<div class="ability-strength">
+					<h4>STR</h4>
+					<p>@Model._monster.strength (@Model.Modifier(Model._monster.strength))</p>
+				</div> <!-- ability strength -->
+				<div class="ability-dexterity">
+					<h4>DEX</h4>
+					<p>@Model._monster.dexterity (@Model.Modifier(Model._monster.dexterity))</p>
+				</div> <!-- ability dexterity -->
+				<div class="ability-constitution">
+					<h4>CON</h4>
+					<p>@Model._monster.constitution (@Model.Modifier(Model._monster.constitution))</p>
+				</div> <!-- ability constitution -->
+				<div class="ability-intelligence">
+					<h4>INT</h4>
+					<p>@Model._monster.intelligence (@Model.Modifier(Model._monster.intelligence))</p>
+				</div> <!-- ability intelligence -->
+				<div class="ability-wisdom">
+					<h4>WIS</h4>
+					<p>@Model._monster.wisdom (@Model.Modifier(Model._monster.wisdom))</p>
+				</div> <!-- ability wisdom -->
+				<div class="ability-charisma">
+					<h4>CHA</h4>
+					<p>@Model._monster.charisma (@Model.Modifier(Model._monster.charisma))</p>
+				</div> <!-- ability charisma -->
+			</div> <!-- abilities -->
+			<svg height="5" width="100%" class="tapered-rule">
+	    <polyline points="0,0 400,2.5 0,5"></polyline>
+	  </svg>
+			<div class="property-line first">
+				<h4>Damage Immunities: </h4>
+				<p>
+					@foreach (var item in Model._monster.damage_immunities)
+					{
+						<p>@item, </p>
+					}
+				</p>
+			</div> <!-- property line -->
+			<div class="property-line">
+				<h4>Condition Immunities</h4>
+				<p>
+					@foreach (var item in Model._monster.condition_immunities)
+					{
+						<p>@item.name, </p>
+					}
+				</p>
+			</div> <!-- property line -->
+			<div class="property-line">
+				<h4>Senses: </h4>
+				<p>
+					@if (Model._monster.senses.blindsight != null)
+                    {
+                        <p>Blindsight: @Model._monster.senses.blindsight</p>
+                    }
+					@if (Model._monster.senses.darkvision != null)
+                    {
+                        <p>Darkvision: @Model._monster.senses.darkvision</p>
+                    }
+					@if (Model._monster.senses.tremorsense != null)
+                    {
+                        <p>TremorSense: @Model._monster.senses.tremorsense</p>
+                    }
+                    @if (Model._monster.senses.truesight != null)
+                    {
+                        <p>TrueSight: @Model._monster.senses.truesight</p>
+                    }
+				</p>
+			</div> <!-- property line -->
+			<div class="property-line">
+				<h4>Languages</h4>
+				<p>@Model._monster.languages</p>
+			</div> <!-- property line -->
+			<div class="property-line last">
+				<h4>Challenge</h4>
+				<p>@Model._monster.challenge_rating (@Model._monster.xp XP)</p>
+			</div> <!-- property line -->
+		</div> <!-- top stats -->
+		<svg height="5" width="100%" class="tapered-rule">
+	    <polyline points="0,0 400,2.5 0,5"></polyline>
+	  </svg>
+	  @foreach (var item in Model._monster.special_abilities)
+		{
+			<div class="property-block">
+				<h4>@item.name</h4>
+				<p>
+					@item.desc
+				</p>
+			</div> <!-- property block -->
+		}
+	</div> <!-- section left -->
+	<div class="section-right">
+		<div class="actions">
+			<h3>Actions</h3>
+			@foreach(var item in Model._monster.actions)
+			{
+				<div class="property-block">
+					<h4>@item.name</h4>
+					<p>@item.desc</p>
+				</div> <!-- property block -->
+			}
+		</div> <!-- actions -->
+		@if (Model._monster.legendary_actions.Length != 0)
+		{
+			<div class="actions">
+				<h3>Legendary Actions</h3>
+				@foreach(var item in Model._monster.legendary_actions)
+				{
+					<div class="property-block">
+						<h4>@item.name</h4>
+						<p>@item.desc</p>
+					</div> <!-- property block -->
+				}
+			</div> <!-- actions -->
+		}		
+	</div> <!-- section right -->
+	<hr class="orange-border bottom" />
+</div> <!-- stat block -->
+

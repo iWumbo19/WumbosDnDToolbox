@@ -62,6 +62,8 @@ namespace WumbosDnDToolbox
             {
                 endpoints.MapRazorPages();
             });
+
+            MonsterDb.InitializeMonsterDbSmall();
         }
     }
 }

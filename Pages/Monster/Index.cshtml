@@ -1,0 +1,82 @@
+﻿@page
+@using WumbosDnDToolbox.Model
+@model WumbosDnDToolbox.Pages.Monster.DatabaseModel
+@{
+}
+
+<div class="col-12 border p-3 mt-3">
+    @if (MonsterDb._monsters.Length != 0)
+    {
+        <table class="table table-hover border">
+            <tr class="table-secondary">
+                <th colspan="1">
+                    <label>Name</label>
+                </th>
+                <th colspan="1">
+                    <label>Size</label>
+                </th>
+                <th colspan="1">
+                    <label>Type</label>
+                </th>
+                <th colspan="1">
+                    <label>AC</label>
+                </th>
+                <th colspan="1">
+                    <label>HP</label>
+                </th>
+                <th colspan="2">
+                    <label>Speed</label>
+                </th>
+            </tr>
+            @foreach (MonsterModel monster in MonsterDb._monsters)
+            {
+                <tr>
+                    <td>
+                        @monster.name
+                    </td>
+                    <td>
+                        @monster.size
+                    </td>
+                    <td>
+                        @char.ToUpper(monster.type[0])@monster.type.Substring(1)
+                    </td>
+                    <td>
+                        @monster.armor_class
+                    </td>
+                    <td>
+                        @monster.hit_points
+                    </td>
+                    <td>
+                        @if (monster.speed.walk != null)
+                        {
+                            <label>Walk: @monster.speed.walk</label>
+                        }
+					    @if (monster.speed.burrow != null)
+                        {
+                            <label>Walk: @monster.speed.burrow</label>
+                        }
+					    @if (monster.speed.climb != null)
+                        {
+                            <label>Walk: @monster.speed.climb</label>
+                        }
+                        @if (monster.speed.fly != null)
+                        {
+                            <label>Fly: @monster.speed.fly</label>
+                        }
+                        @if (monster.speed.swim != null)
+                        {
+                            <label>Swim: @monster.speed.swim</label>
+                        }
+                    </td>
+                    <td>
+                        <a asp-page="Details" asp-route-name="@monster.name" class="btn btn-primary btn-sm text-white">Details</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <p>No Monsters Found in Database</p>
+    }
+</div>
