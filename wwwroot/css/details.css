@@ -2,6 +2,10 @@
     text-align: center;
 }
 
+.back {
+    font-size: 16px;
+}
+
 .stat-block {
     text-align: left;
     margin: 20px;

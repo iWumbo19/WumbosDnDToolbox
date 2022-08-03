@@ -1,13 +1,24 @@
 ﻿@page
 @using WumbosDnDToolbox.Model
 @model WumbosDnDToolbox.Pages.Monster.DatabaseModel
-@{
+@section Styles{
+	<link rel="stylesheet" href="~/css/dbtable.css" />
 }
 
+<div class="search-wrapper d-flex">
+	<form method="post">
+	    <input asp-page-handler="Search" asp-for="NameFilter" type="text" class="search-box" placeholder="Filter Name" />
+        <input asp-page-handler="Search" asp-for="SizeFilter" type="text" class="search-box" placeholder="Filter Size" />
+        <button asp-page-handler="Search" class="btn btn-primary close-icon">Go</button>
+        <button asp-page-handler="Clear" class="btn btn-danger close-icon">Clear</button>
+    </form>
+</div>
+
 <div class="col-12 border p-3 mt-3">
-    @if (MonsterDb._monsters.Length != 0)
+    @if (Model.monsters.Length != 0)
     {
-        <table class="table table-hover border" id="sortTable">
+        <p>Records Found: @Model.monsters.Length</p>
+        <table class="table table-hover border">
             <tr class="table-secondary">
                 <th colspan="1">
                     <label>Name</label>
@@ -19,16 +30,16 @@
                     <label>Type</label>
                 </th>
                 <th colspan="1">
-                    <label>AC</label>
+                    <label>CR</label>
                 </th>
                 <th colspan="1">
-                    <label>HP</label>
+                    <label>AC</label>
                 </th>
                 <th colspan="2">
-                    <label>Speed</label>
+                    <label>HP</label>
                 </th>
             </tr>
-            @foreach (MonsterModel monster in MonsterDb._monsters)
+            @foreach (MonsterModel monster in Model.monsters)
             {
                 <tr>
                     <td>
@@ -41,32 +52,13 @@
                         @char.ToUpper(monster.type[0])@monster.type.Substring(1)
                     </td>
                     <td>
-                        @monster.armor_class
+                        CR @monster.challenge_rating
                     </td>
                     <td>
-                        @monster.hit_points
+                        AC @monster.armor_class
                     </td>
                     <td>
-                        @if (monster.speed.walk != null)
-                        {
-                            <label>Walk: @monster.speed.walk</label>
-                        }
-					    @if (monster.speed.burrow != null)
-                        {
-                            <label>Walk: @monster.speed.burrow</label>
-                        }
-					    @if (monster.speed.climb != null)
-                        {
-                            <label>Walk: @monster.speed.climb</label>
-                        }
-                        @if (monster.speed.fly != null)
-                        {
-                            <label>Fly: @monster.speed.fly</label>
-                        }
-                        @if (monster.speed.swim != null)
-                        {
-                            <label>Swim: @monster.speed.swim</label>
-                        }
+                        HP @monster.hit_points
                     </td>
                     <td>
                         <a asp-page="Details" asp-route-name="@monster.name" class="btn btn-primary btn-sm text-white">Details</a>
@@ -74,9 +66,6 @@
                 </tr>
             }
         </table>
-        <script>
-            $('#sortTable').DataTable();
-        </script>
     }
     else
     {

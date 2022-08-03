@@ -44,7 +44,7 @@ namespace WumbosDnDToolbox.Data
                 CategoryReferenceModel monsterReference = JsonConvert.DeserializeObject<CategoryReferenceModel>(collectionJSON);
                 List<string> monsterNameList = new List<string>();
                 List<MonsterModel> monsters = new List<MonsterModel>();
-                for (int i = 0; i < 25; i++)
+                for (int i = 0; i < 10; i++)
                 {
                     monsterNameList.Add(monsterReference.results[i].name);
                     string monsterJSON = new WebClient().DownloadString("https://www.dnd5eapi.co" + monsterReference.results[i].url);
