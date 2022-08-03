@@ -1,15 +1,6 @@
-﻿
-body {
+﻿body {
     text-align: center;
-    font-size: 13.5px;
-    line-height: 1.2em;
 }
-
-    body * {
-        box-sizing: border-box;
-        max-width: 100%;
-        font-family: 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
-    }
 
 .stat-block {
     text-align: left;
@@ -21,13 +12,15 @@ body {
     background: #FDF1DC;
     padding: 5px 10px 20px;
     box-shadow: 0 0 1.5em #867453;
+    font-size: 13.5px;
+    font-family: 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
 }
 
-    .stat-block.wide {
-        width: 46.5%;
-        min-width: 560px;
-        text-align: center;
-    }
+        .stat-block.wide {
+            width: 75%;
+            min-width: 560px;
+            text-align: center;
+        }
 
         .stat-block.wide .section-left,
         .stat-block.wide .section-right {
@@ -237,3 +230,4 @@ body {
         margin: 20px 0;
     }
 }
+
