@@ -14,4 +14,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.22" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="DnDCharacterCreator">
+      <HintPath>..\DnDCharacterCreator\bin\Release\netcoreapp3.1\DnDCharacterCreator.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
