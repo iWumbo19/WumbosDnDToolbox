@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
 using System.Linq;
 using WumbosDnDToolbox.Data;
 using WumbosDnDToolbox.Model;
@@ -15,6 +16,15 @@ namespace WumbosDnDToolbox.Pages.Monster
 
         [BindProperty(SupportsGet = true)]
         public string? SizeFilter { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string? TypeFilter { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string? CRFilter { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public bool FilterIsAnd { get; set; }
 
         public void OnGet()
         {
@@ -33,15 +43,42 @@ namespace WumbosDnDToolbox.Pages.Monster
 
         public void OnPostSearch()
         {
-            if (!string.IsNullOrEmpty(NameFilter))
+            monsters = MonsterDb._monsters;
+            if (!FilterIsAnd) // AND FILTER
             {
-                var filtered = MonsterDb._monsters.Where(s => s.name.Contains(NameFilter)).ToArray();
-                monsters = filtered;
+                if (!string.IsNullOrEmpty(NameFilter))
+                {
+                    var filtered = monsters.Where(s => s.name.Contains(NameFilter, System.StringComparison.OrdinalIgnoreCase)).ToArray();
+                    monsters = filtered;
+                }
+                if (!string.IsNullOrEmpty(SizeFilter))
+                {
+                    var filtered = monsters.Where(s => s.size.Contains(SizeFilter, System.StringComparison.OrdinalIgnoreCase)).ToArray();
+                    monsters = filtered;
+                }
+                if (!string.IsNullOrEmpty(TypeFilter))
+                {
+                    var filtered = monsters.Where(s => s.type.Contains(TypeFilter, System.StringComparison.OrdinalIgnoreCase)).ToArray();
+                    monsters = filtered;
+                }
             }
-            if (!string.IsNullOrEmpty(SizeFilter))
+            else // OR FILTER
             {
-                var filtered = monsters.Where(s => s.size.Contains(SizeFilter)).ToArray();
-                monsters = filtered;
+                HashSet<MonsterModel> results = new HashSet<MonsterModel>();
+                if (NameFilter != null)
+                    results.UnionWith(MonsterDb._monsters.Where(s =>
+                        s.name.Contains(NameFilter, System.StringComparison.OrdinalIgnoreCase))
+                        .ToArray());
+                if (string.IsNullOrEmpty(Request.Form["sizeFilter"].ToString())) 
+                    results.UnionWith(MonsterDb._monsters.Where(s => 
+                        s.size.Contains(Request.Form["sizeFilter"], System.StringComparison.OrdinalIgnoreCase))
+                        .ToArray());
+                if (string.IsNullOrEmpty(Request.Form["typeFilter"].ToString())) 
+                    results.UnionWith(MonsterDb._monsters.Where(s => 
+                        s.type.Contains(Request.Form["typeFilter"], System.StringComparison.OrdinalIgnoreCase))
+                        .ToArray());
+
+                monsters = results.ToArray();
             }
             RedirectToPage("Index");
         }
@@ -51,6 +88,7 @@ namespace WumbosDnDToolbox.Pages.Monster
         {
             NameFilter = null;
             SizeFilter = null;
+            TypeFilter = null;
             ModelState.Clear();
             RedirectToPage("Index");
         }
