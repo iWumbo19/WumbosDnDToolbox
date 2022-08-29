@@ -13,19 +13,19 @@
     <section class="misc">
       <ul>
         <li>
-          <label for="classlevel">Class & Level</label><input name="classlevel" value="@Model.character.Class @Model.character.Level">
+          <label for="classlevel">Class & Level</label><input name="classlevel" value="@Model.character.Class.GetClassName() @Model.character.Level">
         </li>
         <li>
-          <label for="background">Background</label><input name="background" value="NULL" />
+          <label for="background">Background</label><input name="background" value="@Model.character.Personality.Background.GetBackgroundName()" />
         </li>
         <li>
           <label for="playername">Player Name</label><input name="playername" placeholder="Player McPlayerface">
         </li>
         <li>
-          <label for="race">Race</label><input name="race" value="@Model.character.Race" />
+          <label for="race">Race</label><input name="race" value="@Model.character.Race.GetRaceName()" />
         </li>
         <li>
-          <label for="alignment">Alignment</label><input name="alignment" value="NULL" />
+          <label for="alignment">Alignment</label><input name="alignment" value="@Model.character.Personality.Alignment.ToString()" />
         </li>
         <li>
           <label for="experiencepoints">Experience Points</label><input name="experiencepoints" placeholder="3240" />
@@ -334,13 +334,13 @@
             <tbody>
               <tr>
                 <td>
-                  <input name="atkname1" type="text" />
+                  <input name="atkname1" type="text" value="@Model.character.WeaponEquiped.Name" />
                 </td>
                 <td>
-                  <input name="atkbonus1" type="text" />
+                  <input name="atkbonus1" type="text" value="+@Model.character.HitBonus"/>
                 </td>
                 <td>
-                  <input name="atkdamage1" type="text" />
+                  <input name="atkdamage1" type="text" value="@(Model.character.WeaponEquiped.DieAmount)d@(Model.character.WeaponEquiped.DamageDie) @Model.character.WeaponEquiped.DamageType"/>
                 </td>
               </tr>
               <tr>
@@ -399,21 +399,22 @@
     <section>
       <section class="flavor">
         <div class="personality">
-          <label for="personality">Personality</label><textarea name="personality"></textarea>
+          <label for="personality">Personality</label><textarea name="personality">@Model.character.Personality.Trait</textarea>
         </div>
         <div class="ideals">
-          <label for="ideals">Ideals</label><textarea name="ideals"></textarea>
+          <label for="ideals">Ideals</label><textarea name="ideals">@Model.character.Personality.Ideal</textarea>
         </div>
         <div class="bonds">
-          <label for="bonds">Bonds</label><textarea name="bonds"></textarea>
+          <label for="bonds">Bonds</label><textarea name="bonds">@Model.character.Personality.Bond</textarea>
         </div>
         <div class="flaws">
-          <label for="flaws">Flaws</label><textarea name="flaws"></textarea>
+          <label for="flaws">Flaws</label><textarea name="flaws">@Model.character.Personality.Flaw</textarea>
         </div>
       </section>
       <section class="features">
         <div>
-          <label for="features">Features & Traits</label><textarea name="features"></textarea>
+          <label for="features">Features & Traits</label>
+          <textarea name="features">@Model.character.GetAbilitiesString()</textarea>
         </div>
       </section>
     </section>
