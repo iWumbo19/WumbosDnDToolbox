@@ -18,6 +18,9 @@
     <Reference Include="DnDCharacterCreator">
       <HintPath>..\DnDCharacterCreator\bin\Release\netcoreapp3.1\DnDCharacterCreator.dll</HintPath>
     </Reference>
+    <Reference Include="MagicShopLibrary">
+      <HintPath>..\MagicShopExtension\MagicShopLibrary\bin\Debug\netcoreapp3.1\MagicShopLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

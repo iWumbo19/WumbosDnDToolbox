@@ -1,0 +1,17 @@
+﻿@page
+@using MagicShopLibrary.Models
+@model WumbosDnDToolbox.Pages.Shop.IndexModel
+@{
+}
+
+@foreach(MagicItem item in Model.Shop.Inventory)
+{
+    <p>Item Name: @item.Name</p>
+    <p>Descripton: @(item.Description[0]), ~@(item.Cost)gp</p>
+    @for(int i = 1; i < item.Description.Count(); i++)
+    {
+        <p>@item.Description[i]</p>
+    }
+    <br />
+    <br />
+}
