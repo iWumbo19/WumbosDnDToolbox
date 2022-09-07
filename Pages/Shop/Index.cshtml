@@ -1,17 +1,60 @@
 ﻿@page
+@using MagicShopLibrary
 @using MagicShopLibrary.Models
+@using static WumbosDnDToolbox.Pages.Shop.IndexModel
 @model WumbosDnDToolbox.Pages.Shop.IndexModel
 @{
 }
 
+<div class="search-box container form-group p-3 mt-3">
+	<form method="post">
+        <div class="row my-2">
+
+            <section class="col">
+                <label class="form-control-label">Size: </label>
+                <select name="levelFilter" class="form-control">
+                    @foreach (var level in Enum.GetNames(typeof(PlayerLevel)))
+                    {
+                        <option value="@level">@level</option>
+                    }
+                </select>
+            </section> <!--Size Filter-->
+
+            <section class="col">
+                <label class="form-control-label">Size: </label>
+                <select name="sizeFilter" class="form-control">
+                    @foreach (var size in Enum.GetNames(typeof(ShopSize)))
+                    {
+                        <option value="@size">@size</option>
+                    }
+                </select>
+            </section> <!--Size Filter-->
+
+            <section class="col">
+                <label class="form-control-label">Type: </label>
+                <select name="typeFilter" class="form-control">
+                    @foreach (var type in Enum.GetNames(typeof(ShopType)))
+                    {
+                        <option value="@type">@type</option>
+                    }
+                </select>
+            </section> <!--Type Filter-->
+        </div> <!--First Row-->
+
+        
+
+        <button asp-page-handler="Search" class="btn btn-primary form-button">Go</button>
+    </form>
+</div>
+
 @foreach(MagicItem item in Model.Shop.Inventory)
 {
-    <p>Item Name: @item.Name</p>
-    <p>Descripton: @(item.Description[0]), @(item.Cost)gp</p>
-    @for(int i = 1; i < item.Description.Count(); i++)
-    {
-        <p>@item.Description[i]</p>
-    }
-    <br />
-    <br />
+    <div class="border m-5">
+        <p>Item Name: @item.Name</p>
+        <p>Descripton: @(item.Description[0]), @(item.Cost)gp</p>
+        @for(int i = 1; i < item.Description.Count(); i++)
+        {
+            <p>@item.Description[i]</p>
+        }
+    </div>
 }
