@@ -11,7 +11,7 @@ namespace WumbosDnDToolbox.Pages.Shop
         public MagicShop Shop { get; set; }
         public void OnGet()
         {
-            Shop = new MagicShop(20);
+            Shop = new MagicShop(5);
         }
 
         public void OnPostSearch()
