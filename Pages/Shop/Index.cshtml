@@ -11,7 +11,7 @@
         <div class="row my-2">
 
             <section class="col">
-                <label class="form-control-label">Size: </label>
+                <label class="form-control-label">Average Player Level: </label>
                 <select name="levelFilter" class="form-control">
                     @foreach (var level in Enum.GetNames(typeof(PlayerLevel)))
                     {
@@ -21,7 +21,7 @@
             </section> <!--Size Filter-->
 
             <section class="col">
-                <label class="form-control-label">Size: </label>
+                <label class="form-control-label">Area Size: </label>
                 <select name="sizeFilter" class="form-control">
                     @foreach (var size in Enum.GetNames(typeof(ShopSize)))
                     {
@@ -31,7 +31,7 @@
             </section> <!--Size Filter-->
 
             <section class="col">
-                <label class="form-control-label">Type: </label>
+                <label class="form-control-label">Shop Type: </label>
                 <select name="typeFilter" class="form-control">
                     @foreach (var type in Enum.GetNames(typeof(ShopType)))
                     {
