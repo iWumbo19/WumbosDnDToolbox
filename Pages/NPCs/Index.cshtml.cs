@@ -4,6 +4,9 @@ using DnDCharacterCreator.Models;
 using System.Text;
 using System;
 using DnDCharacterCreator.Options;
+using DnDCharacterCreator.Classes;
+using DnDCharacterCreator.Races;
+using DnDCharacterCreator.Interfaces;
 
 namespace WumbosDnDToolbox.Pages.NPCs
 {
@@ -13,6 +16,75 @@ namespace WumbosDnDToolbox.Pages.NPCs
         public void OnGet()
         {
             character = new Character();
+        }
+
+        public void OnPostGenerate()
+        {
+            character = new Character(FormToClass(Request.Form["classSelect"]), FormToRace(Request.Form["raceSelect"]));
+        }
+
+        private IClass FormToClass(string _class)
+        {
+            switch (_class)
+            {
+                case "":
+                    return null;
+                case "Barbarian":
+                    return new Barbarian();
+                case "Bard":
+                    return new Bard();
+                case "Cleric":
+                    return new Cleric();
+                case "Druid":
+                    return new Druid();
+                case "Fighter":
+                    return new Fighter();
+                case "Monk":
+                    return new Monk();
+                case "Paladin":
+                    return new Paladin();
+                case "Ranger":
+                    return new Ranger();
+                case "Rouge":
+                    return new Rouge();
+                case "Sorcerer":
+                    return new Sorcerer();
+                case "Warlock":
+                    return new Warlock();
+                case "Wizard":
+                    return new Wizard();
+                default:
+                    throw new Exception("Did not recognize pass in Class");
+            }
+        }
+
+        private IRace FormToRace(string race)
+        {
+            switch (race)
+            {
+                case "":
+                    return null;
+                case "Dragonborn":
+                    return new Dragonborn();
+                case "Drawf":
+                    return new Dwarf();
+                case "Elf":
+                    return new Elf();
+                case "Gnome":
+                    return new Gnome();
+                case "HalfElf":
+                    return new HalfElf();
+                case "Halfling":
+                    return new Halfling();
+                case "HalfOrc":
+                    return new HalfOrc();
+                case "Human":
+                    return new Human();
+                case "Tiefling":
+                    return new Tiefling();
+                default:
+                    throw new Exception("Did not recognize passed in Race");
+            }
         }
 
         public string GetProficiencies()

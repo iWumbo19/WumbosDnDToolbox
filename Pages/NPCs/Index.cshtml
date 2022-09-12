@@ -4,6 +4,37 @@
 @section Styles{
     <link rel="stylesheet" href="~/css/npcpage.css" />
 }
+<container class="row-2">
+    <form method="post" class="row">
+
+        <section class="col">
+                <label class="form-control-label">Race: </label>
+                <select name="raceSelect" class="form-control">
+                    <option value="">Random</option>
+                    @foreach (var race in Enum.GetNames(typeof(Race)))
+                    {
+                        <option value="@race">@race</option>
+                    }
+                </select>
+            </section> <!--Type Filter-->
+
+        <section class="col">
+                <label class="form-control-label">Class:</label>
+                <select name="classSelect" class="form-control">
+                    <option value="">Random</option>
+                    @foreach (var _class in Enum.GetNames(typeof(Class)))
+                    {
+                        <option value="@_class">@_class</option>
+                    }
+                </select>
+            </section> <!--Size Filter-->
+
+            <div class="col mt-4">
+                <button asp-page-handler="Generate" class="btn btn-primary form-button col">Generate</button>
+            </div>
+    </form>
+    
+</container>
 
 <form class="charsheet">
   <header>
