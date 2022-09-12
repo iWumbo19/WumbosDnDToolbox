@@ -16,10 +16,10 @@
 
   <ItemGroup>
     <Reference Include="DnDCharacterCreator">
-      <HintPath>..\DnDCharacterCreator\bin\Release\netcoreapp3.1\DnDCharacterCreator.dll</HintPath>
+      <HintPath>..\dnd-character-library\bin\Release\netcoreapp3.1\DnDCharacterCreator.dll</HintPath>
     </Reference>
     <Reference Include="MagicShopLibrary">
-      <HintPath>..\MagicShopExtension\MagicShopLibrary\bin\Debug\netcoreapp3.1\MagicShopLibrary.dll</HintPath>
+      <HintPath>..\MagicShopExtension\MagicShopLibrary\bin\Release\netcoreapp3.1\MagicShopLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
 

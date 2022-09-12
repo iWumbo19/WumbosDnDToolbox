@@ -13,14 +13,25 @@ namespace WumbosDnDToolbox.Pages.NPCs
     public class IndexModel : PageModel
     {
         public Character character;
+        public IRace Race;
+        public IClass Class;
+        
         public void OnGet()
         {
             character = new Character();
+            Race = new Dragonborn();
+            Class = new Barbarian();
         }
 
-        public void OnPostGenerate()
+        public ActionResult OnPostGenerate()
         {
-            character = new Character(FormToClass(Request.Form["classSelect"]), FormToRace(Request.Form["raceSelect"]));
+            Race = FormToRace(Request.Form["raceSelect"]);
+            Class = FormToClass(Request.Form["classSelect"]);
+            character = new Character(
+                FormToClass(Request.Form["classSelect"]),
+                FormToRace(Request.Form["raceSelect"])
+                );
+            return Page();
         }
 
         private IClass FormToClass(string _class)
@@ -54,7 +65,7 @@ namespace WumbosDnDToolbox.Pages.NPCs
                 case "Wizard":
                     return new Wizard();
                 default:
-                    throw new Exception("Did not recognize pass in Class");
+                    return null;
             }
         }
 
@@ -66,7 +77,7 @@ namespace WumbosDnDToolbox.Pages.NPCs
                     return null;
                 case "Dragonborn":
                     return new Dragonborn();
-                case "Drawf":
+                case "Dwarf":
                     return new Dwarf();
                 case "Elf":
                     return new Elf();
@@ -83,9 +94,10 @@ namespace WumbosDnDToolbox.Pages.NPCs
                 case "Tiefling":
                     return new Tiefling();
                 default:
-                    throw new Exception("Did not recognize passed in Race");
+                    return null;
             }
         }
+
 
         public string GetProficiencies()
         {

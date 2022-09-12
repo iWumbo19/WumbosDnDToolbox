@@ -10,7 +10,7 @@
         <section class="col">
                 <label class="form-control-label">Race: </label>
                 <select name="raceSelect" class="form-control">
-                    <option value="">Random</option>
+                    <option value="@Model.Race.GetRaceName()">@Model.Race.GetRaceName()</option>
                     @foreach (var race in Enum.GetNames(typeof(Race)))
                     {
                         <option value="@race">@race</option>
@@ -21,7 +21,7 @@
         <section class="col">
                 <label class="form-control-label">Class:</label>
                 <select name="classSelect" class="form-control">
-                    <option value="">Random</option>
+                    <option value="@Model.Class.GetClassName()">@Model.Class.GetClassName()</option>
                     @foreach (var _class in Enum.GetNames(typeof(Class)))
                     {
                         <option value="@_class">@_class</option>
