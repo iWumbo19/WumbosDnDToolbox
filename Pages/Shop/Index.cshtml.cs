@@ -1,8 +1,5 @@
 using MagicShopLibrary;
-using MagicShopLibrary.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
 
 namespace WumbosDnDToolbox.Pages.Shop
 {
