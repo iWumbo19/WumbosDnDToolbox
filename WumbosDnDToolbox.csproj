@@ -16,4 +16,10 @@
     <PackageReference Include="Wumbo.MagicShopLibrary" Version="1.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="DnD5e.MonsterDatabase">
+      <HintPath>..\DnD5e.MonsterDatabase\DnD5e.MonsterDatabase\bin\Release\netcoreapp3.1\DnD5e.MonsterDatabase.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

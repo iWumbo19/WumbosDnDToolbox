@@ -1,8 +1,7 @@
+using DnD5e.MonsterDatabase.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
-using WumbosDnDToolbox.Data;
-using WumbosDnDToolbox.Model;
 
 namespace WumbosDnDToolbox.Pages.Monster
 {
@@ -12,7 +11,7 @@ namespace WumbosDnDToolbox.Pages.Monster
         public void OnGet(string name)
         {
             if (name == null) throw new Exception();
-            _monster = MonsterDb.GetMonster(name);
+            _monster = DnD5e.MonsterDatabase.Data.GetMonster(name);
         }
 
         public string Modifier(int score)

@@ -1,5 +1,5 @@
 ﻿@page
-@using WumbosDnDToolbox.Model
+@using DnD5e.MonsterDatabase.Models
 @model WumbosDnDToolbox.Pages.Monster.DatabaseModel
 @section Styles{
 	<link rel="stylesheet" href="~/css/dbtable.css" />
@@ -13,47 +13,14 @@
 
 <div class="search-box container form-group p-3 mt-3">
 	<form method="post">
-        <div class="row my-2">
-
-            <section class="col">
-                <label class="text-black form-control-label">Name:</label>
-	            <input asp-page-handler="Search" asp-for="NameFilter" type="text" class="form-control" placeholder="Filter By Name" />
-            </section> <!--Name Filter-->
-
-            <section class="col">
-                <label class="form-control-label">Size: </label>
-                <select name="sizeFilter" class="form-control">
-                    <option value=""></option>
-                    @foreach (var size in Enum.GetNames(typeof(MonsterOptions.Size)))
-                    {
-                        <option value="@size">@size</option>
-                    }
-                </select>
-            </section> <!--Size Filter-->
-
-            <section class="col">
-                <label class="form-control-label">Type: </label>
-                <select name="typeFilter" class="form-control">
-                    <option value=""></option>
-                    @foreach (var type in Enum.GetNames(typeof(MonsterOptions.Type)))
-                    {
-                        <option value="@type">@type</option>
-                    }
-                </select>
-            </section> <!--Type Filter-->
-        </div> <!--First Row-->
-
         
-
-        <button asp-page-handler="Search" class="btn btn-primary form-button">Go</button>
-        <button asp-page-handler="Clear" class="btn btn-danger form-button">Clear</button>
     </form>
 </div>
 
 <div class="col-12 border p-3 mt-3">
-    @if (Model.monsters.Length != 0)
+    @if (Model.Monsters.Count != 0)
     {
-        <p>Records Found: @Model.monsters.Length</p>
+        <p>Records Found: @Model.Monsters.Count</p>
         <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
             <tr class="table-secondary">
                 <th colspan="1">
@@ -75,7 +42,7 @@
                     <label>HP</label>
                 </th>
             </tr>
-            @foreach (MonsterModel monster in Model.monsters)
+            @foreach (MonsterModel monster in Model.Monsters.Items)
             {
                 <tr>
                     <td>
@@ -108,10 +75,3 @@
         <p>No Monsters Found in Database</p>
     }
 </div>
-
-<script type="text/javascript">
-$('#ex1').slider({
-  formatter: function(value) {
-    return value;
-  }
-});</script>
